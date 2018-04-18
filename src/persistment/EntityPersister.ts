@@ -64,7 +64,7 @@ export class EntityPersister<Entity extends ObjectLiteral> {
      * Removes given entity from the database.
      */
     async remove(entity: Entity): Promise<Entity> {
-        const queryBuilder = new QueryBuilder(this.connection, this.queryRunner)
+        const queryBuilder = new QueryBuilder<Entity>(this.connection, this.queryRunner)
             .select(this.metadata.table.name)
             .from(this.metadata.target, this.metadata.table.name);
         const plainObjectToDatabaseEntityTransformer = new PlainObjectToDatabaseEntityTransformer();

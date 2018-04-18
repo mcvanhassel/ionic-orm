@@ -124,7 +124,7 @@ export class ColumnTypes {
     /**
      * Tries to guess a column type from the given function.
      */
-    static determineTypeFromFunction(type: Function): ColumnType {
+    static determineTypeFromFunction(type: any): ColumnType {
         if (type instanceof Date) {
             return ColumnTypes.DATETIME;
 

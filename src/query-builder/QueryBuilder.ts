@@ -1084,7 +1084,7 @@ export class QueryBuilder<Entity> {
      * Gets first scalar result returned by execution of generated query builder sql.
      */
     getSingleScalarResult<T>(): Promise<T> {
-        return this.getScalarResults().then(results => results[0]);
+        return this.getScalarResults<T>().then(results => results[0]);
 
     }
 
@@ -1093,7 +1093,7 @@ export class QueryBuilder<Entity> {
      */
     getResultsAndCount(): Promise<[Entity[], number]> {
         // todo: share database connection and counter
-        return Promise.all<any>([
+        return Promise.all([
             this.getResults(),
             this.getCount()
         ]);
@@ -1119,7 +1119,7 @@ export class QueryBuilder<Entity> {
      * Clones query builder as it is.
      */
     clone(options?: { queryRunner?: QueryRunner, skipOrderBys?: boolean, skipLimit?: boolean, skipOffset?: boolean, ignoreParentTablesJoins?: boolean }): QueryBuilder<Entity> {
-        const qb = new QueryBuilder(this.connection, options ? options.queryRunner : undefined);
+        const qb = new QueryBuilder<Entity>(this.connection, options ? options.queryRunner : undefined);
         if (options && options.ignoreParentTablesJoins)
             qb.ignoreParentTablesJoins = options.ignoreParentTablesJoins;
 

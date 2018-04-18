@@ -128,7 +128,7 @@ export class IonicSQLiteQueryRunner implements QueryRunner {
 
         this.logger.logQuery(query, parameters);
         return new Promise<any[]>((ok, fail) => {
-            const _this = this;
+            const __this = this;
             this.databaseConnection.connection.then((db: SQLiteObject) => {
                 db.executeSql(query, parameters)
                     .then((result) => {
@@ -147,8 +147,8 @@ export class IonicSQLiteQueryRunner implements QueryRunner {
                         }
                     })
                     .catch((error) => {
-                        _this.logger.logFailedQuery(query, parameters);
-                        _this.logger.logQueryError(error);
+                        __this.logger.logFailedQuery(query, parameters);
+                        __this.logger.logQueryError(error);
                         fail(error)
                     });
             });
@@ -170,7 +170,7 @@ export class IonicSQLiteQueryRunner implements QueryRunner {
 
         this.logger.logQuery(sql, parameters);
         return new Promise<any[]>((ok, fail) => {
-            const _this = this;
+            const __this = this;
 
             this.databaseConnection.connection.then((db: SQLiteObject) => {
                 db.executeSql(sql, parameters)
@@ -182,8 +182,8 @@ export class IonicSQLiteQueryRunner implements QueryRunner {
                         ok();
                     })
                     .catch((error) => {
-                        _this.logger.logFailedQuery(sql, parameters);
-                        _this.logger.logQueryError(error);
+                        __this.logger.logFailedQuery(sql, parameters);
+                        __this.logger.logQueryError(error);
                         fail(error);
                     });
             });
